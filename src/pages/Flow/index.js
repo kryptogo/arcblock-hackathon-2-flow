@@ -148,7 +148,7 @@ class FlowDemo extends Component {
   objectHighlighted = async (highlightedObject) => {
     const id = highlightedObject && highlightedObject.name;
 
-    if (id !== this.id) {
+    if (id != null && id !== this.id ) {
       this.id = id;
       const client = getClient(this.state.dataSource.name);
       const data = await client.doRawQuery(`{
