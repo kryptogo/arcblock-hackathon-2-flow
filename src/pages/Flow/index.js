@@ -5,7 +5,6 @@ import Vizceral from 'vizceral-react';
 import { dataSources, getClient } from '../../libs/ocap';
 
 import Layout from '../../components/Layout';
-import Loading from '../../components/Loading';
 
 import './style.css';
 
@@ -187,7 +186,7 @@ class FlowDemo extends Component {
   }
 
   render() {
-    const { loading, dataSource, highlightedData } = this.state;
+    const { highlightedData } = this.state;
 
     return (
       <Layout>

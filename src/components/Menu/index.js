@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Container, Image, Menu } from 'semantic-ui-react';
 
 import logo from './logo.png';
