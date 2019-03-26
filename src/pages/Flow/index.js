@@ -82,7 +82,7 @@ class FlowDemo extends Component {
         data {
           address
           balance
-          txsSent {
+          transactions {
             data{
               hash
               total
@@ -108,25 +108,29 @@ class FlowDemo extends Component {
     const nodes = [];
 
     data.forEach(account => {
-      account.txsSent.data.forEach(tran => {
-        tran.outputs.data.forEach(out => {
-          const target = out.account;
-          nodes.push({
-            class: "normal",
-            name: out.account,
-            renderer: "focusedChild",
-            size: 120
-          });
-          connections.push({
-            class: "normal",
-            metrics: {
-              normal: Math.log2(tran.total),
-            },
-            source: account.address,
-            target
+      if (account.transactions.data != null) {
+        console.log(account.transactions)
+        account.transactions.data.forEach(tran => {
+          tran.outputs.data.forEach(out => {
+            const target = out.account;
+            nodes.push({
+              class: "normal",
+              name: out.account,
+              renderer: "focusedChild",
+              size: 120
+            });
+            connections.push({
+              class: "normal",
+              metrics: {
+                normal: Math.log2(tran.total),
+              },
+              source: account.address,
+              target
+            });
           });
         });
-      });
+      }
+
 
       nodes.push({
         class: "normal",
@@ -157,7 +161,7 @@ class FlowDemo extends Component {
           balance
           numberTxsReceived
           numberTxsSent
-          txsSent {
+          transactions {
           	data {
               hash
               total
@@ -173,7 +177,7 @@ class FlowDemo extends Component {
         }
       }`);
 
-      if (data.accountByAddress && data.accountByAddress.txsSent && data.accountByAddress.txsSent.data.length > 0) {
+      if (data.accountByAddress && data.accountByAddress.transactions && data.accountByAddress.transactions.data.length > 0) {
         this.updateData(baseGraph, [data.accountByAddress]);
       } else {
         alert('Nothing sent!');
